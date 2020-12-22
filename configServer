@@ -1,0 +1,15 @@
+#!/bin/sh
+
+start(){
+service nginx start
+gunicorn --workers 1 --bind unix:/app/labBack/labBack.sock labBack.wsgi:application
+}
+case "$1" in
+start)
+start
+;;
+*)
+echo $"Usar: $0 {start}"
+exit 1
+esac
+exit 0
